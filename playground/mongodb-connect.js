@@ -2,7 +2,7 @@
 
 const {MongoClient,ObjectID}  = require('mongodb');
 
-const url = 'mongodb://localhost:27017/TodoApp';
+const url = 'mongodb://localhost:27017/TodoApp'; //at this point the TodoApp db is just created once you insert into the db
 MongoClient.connect(url,(err,db)=>{
     if(err)
         return console.log('error connecting to database');
