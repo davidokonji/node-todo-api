@@ -12,7 +12,9 @@ const todos =[{
     text: 'first test todo'
 },{
     _id: new ObjectID(),
-    text: 'second test todo'
+    text: 'second test todo',
+    completed: true,
+    completedAt : 333
 }];
 //<-- eof testing get route
 //NOTE: the test suite wont run correctly because our test suite assumes the todo collection is empty,so we run a mocha   
@@ -133,3 +135,41 @@ describe('DELETE /todos/:id',()=>{
         .end(done)
     });
 });
+describe("PATCH /todos/:id",()=>{
+    it('should update the todo',(done)=>{
+        var hexid = todos[0]._id.toHexString();
+        var text = "this is an updated text";
+        request(app)
+        .patch(`/todos/${hexid}`)
+        .send({
+            completed: true,
+            text
+        })
+        .expect(200)
+        .expect((res)=>{
+            expect(res.body.todo.text).toBe(text);
+            expect(res.body.todo.completed).toBe(true);
+            expect(res.body.todo.completedAt).toBeA('number');
+        })
+        .end(done)
+
+    });
+    it('should clear completed at when todo is not completed',(done)=>{
+        var hexid = todos[1]._id.toHexString();
+        var updatetext = "this is an updated text2";
+        request(app)
+        .patch(`/todos/${hexid}`)
+        .send({
+            completed: false,
+            text: updatetext
+        })
+        .expect(200)
+        .expect((res)=>{
+            expect(res.body.todo.text).toBe(updatetext);
+            expect(res.body.todo.completed).toBe(false);
+            expect(res.body.todo.completedAt).toNotExist();
+        })
+        .end(done)
+
+    });
+})

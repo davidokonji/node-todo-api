@@ -17,6 +17,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jshint": "^2.9.7",
+    "lodash": "^4.15.0",
     "mongodb": "^2.2.5",
     "mongoose": "^5.3.16"
   },
