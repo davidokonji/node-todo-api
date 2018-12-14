@@ -9,12 +9,11 @@
     "test-watch": "nodemon --exec 'npm test' "
   },
   "engines": {
-    "node" : "8.11.3"
+    "node": "8.11.3"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parse": "^0.1.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jshint": "^2.9.7",
